@@ -1,0 +1,6 @@
+#!/bin/sh
+
+set -e
+
+export GITEA_WORK_DIR=/var/lib/gitea
+exec /sbin/setuser git /usr/local/bin/gitea web -c /etc/gitea/app.ini
