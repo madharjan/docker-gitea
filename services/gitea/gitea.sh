@@ -11,7 +11,7 @@ GITEA_BUILD_PATH=/build/services/gitea
 GITEA_VERSION=1.8.2
 
 ## Install Nginx.
-apt-get install -y --no-install-recommends git-core
+apt-get install -y --no-install-recommends git-core iproute2
 
 ## Install Gitea Server
 wget -nv "https://github.com/go-gitea/gitea/releases/download/v${GITEA_VERSION}/gitea-${GITEA_VERSION}-linux-amd64" -O /usr/local/bin/gitea

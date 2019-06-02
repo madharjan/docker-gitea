@@ -84,10 +84,10 @@ stop:
 	sleep 2
 	docker exec gitea /bin/bash -c "rm -rf /etc/gitea/*" 2> /dev/null || true
 	docker exec gitea /bin/bash -c "rm -rf /var/lib/gitea/*" 2> /dev/null || true
-	docker stop gitea gitea_no_gitea gitea_default 2> /dev/null || true
+	docker stop gitea gitea_no_gitea gitea_default gitea-postgresql gitea-postgresql_default 2> /dev/null || true
 
 clean: stop
-	docker rm gitea gitea_no_gitea gitea_default 2> /dev/null || true
+	docker rm gitea gitea_no_gitea gitea_default gitea-postgresql gitea-postgresql_default 2> /dev/null || true
 	rm -rf /tmp/gitea || true
 	docker images | grep "<none>" | awk '{print$3 }' | xargs docker rmi 2> /dev/null || true
 
