@@ -8,6 +8,7 @@ if [ "${DEBUG}" = true ]; then
 fi
 
 GITEA_CONFIG_PATH=/build/config
+GITEA_CUSTOM_PATH=/build/custom
 
 apt-get update
 
@@ -15,8 +16,10 @@ apt-get update
 /build/services/gitea/gitea.sh
 
 mkdir -p /config/etc/gitea
+mkdir -p /config/templates
 
 cp ${GITEA_CONFIG_PATH}/app.ini /config/etc/gitea/app.ini
+cp -r ${GITEA_CUSTOM_PATH}/* /config/templates
 
 mkdir -p /etc/my_init.d
 cp /build/services/20-gitea.sh /etc/my_init.d

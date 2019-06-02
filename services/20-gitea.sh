@@ -96,6 +96,14 @@ else
   waitAandInitializeGitea &
 fi
 
+mkdir -p /var/lib/gitea/custom/templates
+
+if [ -f /var/lib/gitea/custom/templates/home.tmpl ]; then
+  echo "Gitea templates already exists"
+else
+  cp -r /config/templates/* /var/lib/gitea/custom/templates
+fi
+
 chown -R git:git /var/lib/gitea/
 chmod -R 750 /var/lib/gitea/
 chown -R root:git /etc/gitea
