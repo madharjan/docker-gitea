@@ -14,7 +14,8 @@ GITEA_VERSION=1.8.2
 apt-get install -y --no-install-recommends git-core
 
 ## Install Gitea Server
-wget -nv "https://dl.gitea.io/gitea/${GITEA_VERSION}/gitea-${GITEA_VERSION}-linux-amd64" -O /usr/local/bin/gitea
+wget -nv "https://github.com/go-gitea/gitea/releases/download/v${GITEA_VERSION}/gitea-${GITEA_VERSION}-linux-amd64" -O /usr/local/bin/gitea
+#wget -nv "https://dl.gitea.io/gitea/${GITEA_VERSION}/gitea-${GITEA_VERSION}-linux-amd64" -O /usr/local/bin/gitea
 chmod +x /usr/local/bin/gitea
 
 ## Create 'git' user/group

@@ -32,13 +32,12 @@ docker run -d -t \
   --link gitea-postgresql:postgresql \
   -e GITEA_PROTOCOL=http \
   -e GITEA_DOMAIN=192.168.56.254 \
-  -e GITEA_SMTP_HOST=172.18.0.1 \
   -e GITEA_SMTP_PORT=2525 \
   -e GITEA_REGISTRATION_DISABLE=false \
   -e GITEA_INSTALL_LOCK=true \
   -e GITEA_SECRET_KEY=1234567890 \
   -e GITEA_JWT_SECRET=6Lfjq6YUAAAAAFwDmDtfHyHmL1234567890 \
-  -e GITEA_ROOT_EMAIL=root@example.com \
+  -e GITEA_ROOT_EMAIL=root@local.host \
   -e GITEA_ROOT_PASSWORD=Pa55w0rd \
   -p 80:3000 \
   -v /opt/docker/gitea/etc:/etc/gitea \
@@ -49,6 +48,3 @@ docker run -d -t \
 
 sleep 2
 docker logs -f gitea
-
-#-e GITEA_RECAPTCHA_KEY=6Lfjq6YUAAAAACNwh7uAd1o580_XtrYvnnVhO9EJ \
-#-e GITEA_RECAPTCHA_SECRET=6Lfjq6YUAAAAAFwDmDtfHyHmL-iJqwmIgdloIUkS \

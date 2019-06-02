@@ -20,6 +20,8 @@ else
 endif
 
 build:
+	sed -i -e "s/VERSION=.*/VERSION=$(VERSION)/g" bin/gitea-systemd-unit
+	sed -i -e "s/GITEA_VERSION=.*/GITEA_VERSION=$(VERSION)/g" services/gitea/gitea.sh
 	docker build \
 		--build-arg GITEA_VERSION=$(VERSION) \
 		--build-arg VCS_REF=`git rev-parse --short HEAD` \
@@ -33,6 +35,23 @@ run:
 	mkdir -p /tmp/gitea
 
 	docker run -d \
+		-e POSTGRESQL_DATABASE=gitea \
+		-e POSTGRESQL_USERNAME=gitea \
+		-e POSTGRESQL_PASSWORD=gitea \
+		--name gitea-postgresql madharjan/docker-postgresql:9.5
+
+	sleep 2
+
+	docker run -d \
+		-e POSTGRESQL_DATABASE=gitea \
+		-e POSTGRESQL_USERNAME=gitea \
+		-e POSTGRESQL_PASSWORD=gitea \
+		--name gitea-postgresql_default madharjan/docker-postgresql:9.5
+
+	sleep 2
+
+	docker run -d \
+		--link gitea-postgresql:postgresql \
 		-e DEBUG=$(DEBUG) \
 		-e GITEA_USERNAME=myuser \
 		-e GITEA_PASSWORD=mypass \
@@ -44,13 +63,14 @@ run:
 
 	docker run -d \
 		-e DISABLE_GITEA=1 \
-		-e DEBUG=${DEBUG} \
+		-e DEBUG=$(DEBUG) \
 		--name gitea_no_gitea $(NAME):$(VERSION)
 
 	sleep 2
 
 	docker run -d \
-		-e DEBUG=${DEBUG} \
+		--link gitea-postgresql_default:postgresql \
+		-e DEBUG=$(DEBUG) \
 		--name gitea_default $(NAME):$(VERSION)
 
 	sleep 2
