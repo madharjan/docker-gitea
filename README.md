@@ -197,11 +197,13 @@ sudo systemctl start gitea-postgresql
 # generate gitea.service
 docker run --rm \
   -e PORT=80 \
-  -e LINK_CONTAINERS=gitea-postgresql:postgresql \
+  -e LINK_CONTAINERS=gitea-postgresql:postgresql,mail:mail \
   -e GITEA_INSTALL_LOCK=true \
   -e GITEA_SECRET_KEY=1234567890 \
   -e GITEA_JWT_SECRET=6Lfjq6YUAAAAAFwDmDtfHyHmL1234567890 \
   -e GITEA_ROOT_PASSWORD=Pa55w0rd \
+  -e GITEA_SMTP_HOST=mail \
+  -e GITEA_SMTP_FROM=gitea@company.com \
   madharjan/docker-gitea:1.8.2 \
   gitea-systemd-unit | \
   sudo tee /etc/systemd/system/gitea.service

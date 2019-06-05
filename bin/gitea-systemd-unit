@@ -87,7 +87,7 @@ ExecStart=/usr/bin/docker run \\
   -e GITEA_JWT_SECRET=${GITEA_JWT_SECRET} \\
   -e GITEA_ROOT_EMAIL=${GITEA_ROOT_EMAIL} \\
   -e GITEA_ROOT_PASSWORD=${GITEA_ROOT_PASSWORD} \\
-  ${PORT_LINE}-v ${VOLUME_HOME}/${NAME}/etc:/etc/gitea/etc \\
+  ${PORT_LINE}-v ${VOLUME_HOME}/${NAME}/etc:/etc/gitea \\
   -v ${VOLUME_HOME}/${NAME}/lib:/var/lib/gitea \\
   -v ${VOLUME_HOME}/${NAME}/log:/var/log/gitea \\
   --name ${NAME} \\

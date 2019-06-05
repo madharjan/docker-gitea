@@ -19,14 +19,13 @@ wget -nv "https://github.com/go-gitea/gitea/releases/download/v${GITEA_VERSION}/
 chmod +x /usr/local/bin/gitea
 
 ## Create 'git' user/group
-adduser \
-   --system \
-   --shell /bin/bash \
-   --gecos 'Git Version Control' \
-   --group \
-   --disabled-password \
-   --home /home/git \
-   git
+addgroup -S -g 1000 git 
+adduser -S -H -D \
+    -h /home/git \
+    -s /bin/bash \
+    -u 1000 \
+    -G git \
+    git
 
 mkdir -p /etc/service/gitea
 cp ${GITEA_BUILD_PATH}/gitea.runit /etc/service/gitea/run

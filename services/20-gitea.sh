@@ -79,10 +79,6 @@ fi
 
 if [ -f /etc/gitea/app.ini ]; then
   echo "Gitea config 'app.ini' already exists"
-  export GITEA_DB_TYPE GITEA_DB_HOST GITEA_DB_NAME GITEA_DB_USER GITEA_DB_PASS
-  export GITEA_SMTP_ENABLE GITEA_SMTP_HOST GITEA_SMTP_PORT GITEA_SMTP_FROM GITEA_SMTP_USER GITEA_SMTP_PASS
-  export GITEA_RECAPTCHA_ENABLE GITEA_RECAPTCHA_SECRET GITEA_RECAPTCHA_KEY GITEA_REGISTRATION_DISABLE
-  perl -p -i -e 's/\$\{([^}]+)\}/defined $ENV{$1} ? $ENV{$1} : $&/eg' /etc/gitea/app.ini
 else
   cp /config/etc/gitea/app.ini /etc/gitea/app.ini
   export GITEA_DB_TYPE GITEA_DB_HOST GITEA_DB_NAME GITEA_DB_USER GITEA_DB_PASS
