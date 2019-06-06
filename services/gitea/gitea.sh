@@ -19,12 +19,12 @@ wget -nv "https://github.com/go-gitea/gitea/releases/download/v${GITEA_VERSION}/
 chmod +x /usr/local/bin/gitea
 
 ## Create 'git' user/group
-addgroup -S -g 1000 git 
-adduser -S -H -D \
-    -h /home/git \
-    -s /bin/bash \
-    -u 1000 \
-    -G git \
+addgroup --gid 1000 git 
+adduser --system \
+    --home /home/git \
+    --shell /bin/bash \
+    --uid 1000 \
+    --gid 1000 \
     git
 
 mkdir -p /etc/service/gitea
