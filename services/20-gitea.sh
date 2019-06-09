@@ -79,6 +79,7 @@ fi
 
 if [ -f /etc/gitea/app.ini ]; then
   echo "Gitea config 'app.ini' already exists"
+  sed -i -e "s/HOST     = .*/HOST     = ${GITEA_DB_HOST}/g" /etc/gitea/app.ini
 else
   cp /config/etc/gitea/app.ini /etc/gitea/app.ini
   export GITEA_DB_TYPE GITEA_DB_HOST GITEA_DB_NAME GITEA_DB_USER GITEA_DB_PASS
